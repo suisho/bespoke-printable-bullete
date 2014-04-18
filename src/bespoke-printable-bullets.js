@@ -1,39 +1,28 @@
-bespoke.plugins.printableBullets = function(deck, option) {
+bespoke.plugins.printableBullets = function(deck, options) {
+  var getBullets = function(slide, options){
+    // copy from bullets
+    return [].slice.call(slide.querySelectorAll( (typeof options === 'string' ? options : '[data-bespoke-printable-bullet]') ), 0);
 
-  /*
-    Interact with the deck
-    https://github.com/markdalgleish/bespoke.js#deck-instances
-  */
-  deck.next();
-  deck.prev();
-  deck.slide(0);
+  }
+  var appendNext = function(slide, nextSlide){
+    slide.parentNode.insertBefore(nextSlide, slide.nextElementSibling)
+  }
+  deck.slides.forEach(function(slide) {
+    var cloned = slide.cloneNode(true)
+    //cloned.classList.add("bespoke-inactive")
+    var bullets = getBullets(cloned, options)
 
-  /*
-    Slide events
-    https://github.com/markdalgleish/bespoke.js#events
-  */
-  deck.on('activate', function(e) {
-    console.log('Slide #' + e.index + ' was activated!', e.slide);
-  });
+    if(bullets.length < 1) return
 
-  deck.on('deactivate', function(e) {
-    console.log('Slide #' + e.index + ' was deactivated!', e.slide);
-  });
-
-  /*
-    Deck interaction events, return false to cancel
-    https://github.com/markdalgleish/bespoke.js#deck-interaction-events
-  */
-
-  deck.on('next', function(e) {
-    console.log('The next slide is #' + (e.index + 1), deck.slides[e.index + 1]);
-  });
-
-  deck.on('prev', function(e) {
-    console.log('The previous slide is #' + (e.index - 1), deck.slides[e.index - 1]);
-  });
-
-  deck.on('slide', function(e) {
-    console.log('The requested slide is #' + e.index, e.slide);
-  });
+    bullets.forEach(function(bullet){
+      bullet.style.visibility = "hidden"
+    })
+    bullets.reverse().forEach(function(bullet){
+      bullet.style.visibility = "visible"
+      var c = cloned.cloneNode(true)
+      appendNext(slide, c)
+    })
+	})
+  // retake
+  bespoke.from("article")
 };

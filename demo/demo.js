@@ -1,5 +1,5 @@
 bespoke.from('article', {
   keys: true,
   touch: true,
-  printableBullets: true
+  printableBullets: "ul li"
 });
