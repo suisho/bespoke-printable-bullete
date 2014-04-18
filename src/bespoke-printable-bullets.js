@@ -1,4 +1,4 @@
-bespoke.plugins.printableBullets = function(deck) {
+bespoke.plugins.printableBullets = function(deck, option) {
 
   /*
     Interact with the deck
