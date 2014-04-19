@@ -2,7 +2,10 @@
 
 # bespoke-printable-bullets
 
-Clone section which use bullete
+Clone section which use bullete.
+
+## Why this plugin?
+If you must output pdf, but want use bespoke and bullets slide, this plugin is very helpful
 
 ## Download
 
