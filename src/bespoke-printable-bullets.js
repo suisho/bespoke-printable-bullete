@@ -25,7 +25,7 @@ bespoke.plugins.printableBullets = function(deck, options) {
 	})
   //want rebuild form....
 };
-bespokeBullets = function(selectorOrElement, pluginOpt, cb){
+bespokePrintableBullets = function(selectorOrElement, pluginOpt, cb){
   var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement)
 	var slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; })
   mockDeck = {
