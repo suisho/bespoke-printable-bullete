@@ -1,10 +1,12 @@
-bespoke.from('article', {
-  keys: true,
-  touch: true,
-  bullets: 'li, .bullet',
-  scale: true,
-  hash: true,
-  progress: true,
-  state: true,
-  forms: true
-});
+bespokeBullets('article','li, .bullet', function(from, b){
+  bespoke.from(from, {
+    keys: true,
+    touch: true,
+    bullets: b,
+    scale: true,
+    hash: true,
+    progress: true,
+    state: true,
+    forms: true
+  });
+})
