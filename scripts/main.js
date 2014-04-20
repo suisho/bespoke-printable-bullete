@@ -1,8 +1,8 @@
-bespokeBullets('article','li, .bullet', function(from, b){
+bespokePrintableBullets('article','li, .bullet', function(from, b){
   bespoke.from(from, {
     keys: true,
     touch: true,
-    bullets: b,
+    bullets: ".disabled",
     scale: true,
     hash: true,
     progress: true,
