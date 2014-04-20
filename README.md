@@ -21,9 +21,12 @@ First, include both `bespoke.js` and `bespoke-printable-bullets.js` in your page
 Then, simply include the plugin when instantiating your presentation.
 
 ```js
-bespoke.from('article', {
-  printableBullets: true
-});
+bespokeBullets('article',"ul li", function(s,b){
+  bespoke.from(s, {
+    keys: true,
+    touch: true,
+  });
+})
 ```
 
 ## Package managers
@@ -54,3 +57,37 @@ This plugin was built with [generator-bespokeplugin](https://github.com/markdalg
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+Plugin run with before hook events.
+
+Hello.
+I tried to create plugin that modify sections before bespoke start hook event.
+But currently cannot that.
+
+Out of necessity, I implement this function as outside plugin. But that so dirty. :(
+
+```js
+beforeBespke('article', function(from){
+  bespoke.from(from, {
+    keys: true,
+    touch: true,
+  });
+})
+var beforeBespke = function(from, callback){
+  // emulate bespoke from
+  var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement)
+  var slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; })
+  var deck = {
+    slides : slides
+  }
+
+  //  :
+  // do something modification to slide.
+  // (This is a point want to plugin)
+  //  :
+
+  callback(from)
+}
+```
+
+Please tell me if you have more good idea
